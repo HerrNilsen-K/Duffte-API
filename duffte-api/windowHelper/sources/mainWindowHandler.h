@@ -2,7 +2,7 @@
 #define __MAINWINDOWHANDLER_H__
 
 #include <GLFW/glfw3.h>
-
+#include <string>
 class Window
 {
 private:
@@ -17,7 +17,10 @@ public:
     void setDimensions(int width, int height);
     //Sets the X and Y position of the window
     void setPosition(int posX, int posY);
+
     //Creates and dissplays the window
-    void createWindow(char *windowTitle);
+    void createWindow(std::string windowTitle);
+    //Makes context to current
+    void makeContextCurrent();
 };
 #endif // __MAINWINDOWHANDLER_H__

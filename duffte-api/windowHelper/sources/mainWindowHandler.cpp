@@ -8,6 +8,7 @@ Window::Window()
 
 Window::~Window()
 {
+    glfwTerminate();
 }
 
 void Window::setDimensions(int width, int height)
@@ -22,7 +23,11 @@ void Window::setPosition(int posX, int posY)
     this->posY = posY;
 }
 
-void Window::createWindow(char *windowTitle) 
+void Window::createWindow(std::string windowTitle) 
 {
-    windowID = glfwCreateWindow(width, height, windowTitle, 0, 0);
+    windowID = glfwCreateWindow(width, height, windowTitle.c_str(), 0, 0);
+}
+
+void Window::makeContextCurrent(){
+    glfwMakeContextCurrent(windowID);
 }
