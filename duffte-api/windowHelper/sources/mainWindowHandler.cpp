@@ -1,18 +1,28 @@
 #include "mainWindowHandler.h"
 #include <iostream>
 
-void Window::setDimensions(int width, int height) 
+Window::Window()
+{
+    glfwInit();
+}
+
+Window::~Window()
+{
+}
+
+void Window::setDimensions(int width, int height)
 {
     this->width = width;
     this->height = height;
 }
 
-Window::Window() 
+void Window::setPosition(int posX, int posY)
 {
-   glfwInit();
+    this->posX = posX;
+    this->posY = posY;
 }
 
-Window::~Window() 
+void Window::createWindow(char *windowTitle) 
 {
-    
+    windowID = glfwCreateWindow(width, height, windowTitle, 0, 0);
 }
