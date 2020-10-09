@@ -25,5 +25,9 @@ public:
 
     //Returns true as long as the window is opend
     bool runs();
+    //Swaps buffers
+    void swapBuffers();
+    //Polls events
+    void pollEvents();
 };
 #endif // __MAINWINDOWHANDLER_H__

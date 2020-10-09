@@ -34,5 +34,15 @@ void Window::makeContextCurrent(){
 
 bool Window::runs() 
 {
-    return glfwWindowShouldClose(windowID);
+    return !glfwWindowShouldClose(windowID);
+}
+
+void Window::swapBuffers() 
+{
+    glfwSwapBuffers(windowID);
+}
+
+void Window::pollEvents() 
+{
+    glfwPollEvents();
 }
