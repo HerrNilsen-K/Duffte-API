@@ -1,5 +1,5 @@
 #include "mainWindowHandler.h"
-#include <iostream>
+#include <string>
 
 Window::Window()
 {
