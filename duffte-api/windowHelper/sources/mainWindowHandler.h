@@ -22,5 +22,8 @@ public:
     void createWindow(std::string windowTitle);
     //Makes context to current
     void makeContextCurrent();
+
+    //Returns true as long as the window is opend
+    bool runs();
 };
 #endif // __MAINWINDOWHANDLER_H__

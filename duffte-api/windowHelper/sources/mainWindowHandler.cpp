@@ -31,3 +31,8 @@ void Window::createWindow(std::string windowTitle)
 void Window::makeContextCurrent(){
     glfwMakeContextCurrent(windowID);
 }
+
+bool Window::runs() 
+{
+    return glfwWindowShouldClose(windowID);
+}
