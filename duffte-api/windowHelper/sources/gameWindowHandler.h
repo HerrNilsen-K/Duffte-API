@@ -7,8 +7,10 @@ class gameWindow
 {
 private:
     Window windowOBJ;
+    typedef void (*argPTR)();
+    argPTR functionID;
 public:
-    gameWindow(void (*args)());
+    gameWindow(argPTR arg);
     ~gameWindow();
 };
 
