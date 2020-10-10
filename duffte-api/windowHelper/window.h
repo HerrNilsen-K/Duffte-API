@@ -6,5 +6,6 @@
 #define __WINDOW_H__
 
 #include "sources/mainWindowHandler.h"
+#include "sources/gameWindowHandler.h"
 
 #endif // __WINDOW_H__
