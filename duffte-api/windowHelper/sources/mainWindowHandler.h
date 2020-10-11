@@ -14,7 +14,7 @@ public:
     ~Window();
 
     //Returns a pointer to GLFWwindow ID
-    GLFWwindow *windowID();
+    GLFWwindow *ID();
 
     //Sets the width and height of the window 
     void setDimensions(int width, int height);

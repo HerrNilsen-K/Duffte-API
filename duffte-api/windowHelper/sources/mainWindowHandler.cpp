@@ -11,9 +11,9 @@ Window::~Window()
     glfwTerminate();
 }
 
-GLFWwindow* Window::windowID() 
+GLFWwindow* Window::ID() 
 {
-    return windowID;
+    return this->windowID;
 }
 
 
