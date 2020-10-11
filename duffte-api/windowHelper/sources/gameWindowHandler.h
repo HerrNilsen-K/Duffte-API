@@ -11,9 +11,12 @@ private:
     typedef void (*argPTR)();
     argPTR functionID;
 
+private:
+    static void resizeCall(GLFWwindow* window, int width, int height);
+
 public:
     //Stores a reference to a function that will be called in "startRendererLoop"
-    gameWindow(argPTR arg, int width, int height);
+    gameWindow(argPTR arg, int width, int height, std::string);
     ~gameWindow();
 
     //Calls the function, given by the constructor every 1/60 sec / every frame

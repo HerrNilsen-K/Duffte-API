@@ -1,7 +1,7 @@
 #include "mainWindowHandler.h"
 #include <string>
 
-Window::Window()
+Window::Window() : posX(0), posY(0)
 {
     glfwInit();
 }
@@ -10,6 +10,12 @@ Window::~Window()
 {
     glfwTerminate();
 }
+
+GLFWwindow* Window::windowID() 
+{
+    return windowID;
+}
+
 
 void Window::setDimensions(int width, int height)
 {
@@ -23,26 +29,27 @@ void Window::setPosition(int posX, int posY)
     this->posY = posY;
 }
 
-void Window::createWindow(std::string windowTitle) 
+void Window::createWindow(std::string windowTitle)
 {
     windowID = glfwCreateWindow(width, height, windowTitle.c_str(), 0, 0);
 }
 
-void Window::makeContextCurrent(){
+void Window::makeContextCurrent()
+{
     glfwMakeContextCurrent(windowID);
 }
 
-bool Window::runs() 
+bool Window::runs()
 {
     return !glfwWindowShouldClose(windowID);
 }
 
-void Window::swapBuffers() 
+void Window::swapBuffers()
 {
     glfwSwapBuffers(windowID);
 }
 
-void Window::pollEvents() 
+void Window::pollEvents()
 {
     glfwPollEvents();
 }
