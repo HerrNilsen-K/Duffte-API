@@ -1,4 +1,5 @@
 #include "gameWindowHandler.h"
+#include "../../util.hpp"
 #include <iostream>
 
 gameWindow::gameWindow(argPTR arg, int width, int height, std::string name)
@@ -32,8 +33,7 @@ void gameWindow::staticResizeCall(GLFWwindow *window, int width, int height)
         gw->resizeCall(width, height);
     else
     {
-        std::cout << "Error in file: " << __FILE__ << std::endl <<
-        " Line: " << __LINE__ << std::endl;
+        ERROR_LOG("Error: gw in staticResizeCall == 0");
     }
 }
 
