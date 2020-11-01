@@ -7,11 +7,14 @@ class Window
 {
 private:
     GLFWwindow *windowID;
-    int width, height, posX = 0, posY = 0;
+    int width, height, posX, posY;
 
 public:
     Window();
     ~Window();
+
+    //Returns a pointer to GLFWwindow ID
+    GLFWwindow *ID();
 
     //Sets the width and height of the window 
     void setDimensions(int width, int height);
