@@ -1,4 +1,4 @@
-#include "mainWindowHandler.h"
+#include "mainWindowHandler.hpp"
 #include <string>
 
 Window::Window() : posX(0), posY(0)

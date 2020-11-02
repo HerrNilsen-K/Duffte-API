@@ -5,7 +5,7 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#include "sources/mainWindowHandler.h"
-#include "sources/gameWindowHandler.h"
+#include "sources/mainWindowHandler.hpp"
+#include "sources/gameWindowHandler.hpp"
 
 #endif // __WINDOW_H__

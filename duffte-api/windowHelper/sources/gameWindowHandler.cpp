@@ -1,4 +1,4 @@
-#include "gameWindowHandler.h"
+#include "gameWindowHandler.hpp"
 #include "../../util.hpp"
 #include <iostream>
 
