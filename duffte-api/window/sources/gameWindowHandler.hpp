@@ -1,7 +1,7 @@
 #ifndef __GAMEWINDOWHANDLER_H__
 #define __GAMEWINDOWHANDLER_H__
 
-#include "mainWindowHandler.h"
+#include "mainWindowHandler.hpp"
 
 class gameWindow
 {
