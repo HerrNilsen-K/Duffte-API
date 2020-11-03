@@ -2,8 +2,7 @@
 #include "../../util.hpp"
 #include <iostream>
 
-gameWindow::gameWindow(argPTR arg, int width, int height, std::string name)
-: functionID(arg)
+void gameWindow::init(int width, int height, std::string name)
 {
     windowOBJ.setDimensions(width, height);
     windowOBJ.createWindow(name);
@@ -13,15 +12,14 @@ gameWindow::gameWindow(argPTR arg, int width, int height, std::string name)
     glfwSetWindowSizeCallback(windowOBJ.ID(), staticResizeCall);
 }
 
-gameWindow::~gameWindow()
-{
-}
-
 bool gameWindow::startRenderLoop()
 {
     while (windowOBJ.runs())
     {
-        renderContainer();
+        glClear(GL_COLOR_BUFFER_BIT);
+        mainLoop();
+        windowOBJ.swapBuffers();
+        windowOBJ.pollEvents();
     }
     return true;
 }
@@ -39,15 +37,9 @@ void gameWindow::staticResizeCall(GLFWwindow *window, int width, int height)
 
 void gameWindow::resizeCall(int width, int height)
 {
-
-    renderContainer();
-    glViewport(0, 0, width, height);
-}
-
-void gameWindow::renderContainer()
-{
     glClear(GL_COLOR_BUFFER_BIT);
-    functionID();
+    mainLoop();
     windowOBJ.swapBuffers();
     windowOBJ.pollEvents();
+    glViewport(0, 0, width, height);
 }

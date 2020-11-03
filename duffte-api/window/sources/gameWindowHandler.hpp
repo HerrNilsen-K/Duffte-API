@@ -5,28 +5,20 @@
 
 class gameWindow
 {
-private:
+protected:
     Window windowOBJ;
-
-    typedef void (*argPTR)();
-    argPTR functionID;
 
 private:
     //Creates the resize call for GLFW and forwards to "resizeCall(int, int)"
     static void staticResizeCall(GLFWwindow *window, int width, int height);
     void resizeCall(int width, int height);
 
-    //Calls the rendering function
-    void renderContainer();
-
 public:
-    //Stores a reference to a function that will be called in "startRendererLoop"
-    gameWindow() = delete;
-    gameWindow(argPTR arg, int width, int height, std::string);
-    ~gameWindow();
+    void init(int width, int height, std::string name);
 
-    //Calls the function, given by the constructor every 1/60 sec / every frame
     bool startRenderLoop();
+    //Calls the function, given by the constructor every 1/60 sec / every frame
+    virtual void mainLoop() = 0;
 };
 
 #endif // __GAMEWINDOWHANDLER_H__

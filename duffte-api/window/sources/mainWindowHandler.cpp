@@ -1,4 +1,5 @@
 #include "mainWindowHandler.hpp"
+#include <GLFW/glfw3.h>
 #include <string>
 
 Window::Window() : posX(0), posY(0)
