@@ -1,6 +1,7 @@
 #ifndef __MAINWINDOWHANDLER_H__
 #define __MAINWINDOWHANDLER_H__
 
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
 

@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #include "gameWindowHandler.hpp"
 #include "../../util.hpp"
 #include <iostream>
@@ -12,6 +13,7 @@ namespace duffte
         //Set user pointer to access "this" in "staticResizeCall"
         glfwSetWindowUserPointer(windowOBJ.ID(), reinterpret_cast<void *>(this));
         glfwSetWindowSizeCallback(windowOBJ.ID(), staticResizeCall);
+        glewInit();
     }
 
     void gameWindow::startEngine()
