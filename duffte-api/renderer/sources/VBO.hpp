@@ -1,19 +1,22 @@
 #ifndef __VBO_HPP__
 #define __VBO_HPP__
 
-class VBO
+namespace duffte
 {
-private:
-    unsigned int m_buffer;
+    class VBO
+    {
+    private:
+        unsigned int m_buffer;
 
-public:
-    VBO();
-    ~VBO();
+    public:
+        VBO();
+        ~VBO();
 
-    //Bind the buffer
-    void bind();
-    //Unbind the buffer
-    void unbind();
-};
+        //Bind the buffer
+        void bind();
+        //Unbind the buffer
+        void unbind();
+    };
+} // namespace duffte
 
 #endif // __VBO_H__

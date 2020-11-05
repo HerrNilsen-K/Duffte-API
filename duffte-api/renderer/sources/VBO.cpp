@@ -1,20 +1,26 @@
 #include "VBO.hpp"
+#include "../../util.hpp"
 #include <GL/glew.h>
 
-VBO::VBO() 
+namespace duffte
 {
-    glGenBuffers(1, &m_buffer);
-}
+    VBO::VBO()
+    {
+        glGenBuffers(1, &m_buffer);
+        bind();
+    }
 
-VBO::~VBO() 
-{
-    
-}
+    VBO::~VBO()
+    {
+    }
 
-void VBO::bind(){
-    glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
-}
+    void VBO::bind()
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+    }
 
-void VBO::unbind(){
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-}
+    void VBO::unbind()
+    {
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+    }
+} // namespace duffte
