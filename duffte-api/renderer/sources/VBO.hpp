@@ -10,10 +10,10 @@ namespace duffte
     private:
         unsigned int m_buffer;
 
-        ~VBO();
     public:
         VBO() = delete;
         VBO(vboCoords *coords, int coordsNum);
+        ~VBO();
 
         //Bind the buffer
         void bind();
