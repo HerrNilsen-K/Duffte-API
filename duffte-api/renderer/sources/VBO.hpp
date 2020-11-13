@@ -1,6 +1,8 @@
 #ifndef __VBO_HPP__
 #define __VBO_HPP__
 
+#include "VBOHelper.hpp"
+
 namespace duffte
 {
     class VBO
@@ -8,9 +10,10 @@ namespace duffte
     private:
         unsigned int m_buffer;
 
-    public:
-        VBO();
         ~VBO();
+    public:
+        VBO() = delete;
+        VBO(vboCoords *coords, int coordsNum);
 
         //Bind the buffer
         void bind();
