@@ -19,7 +19,7 @@ namespace duffte
         void bind();
         void unbind();
 
-        void push(int size, int stride);
+        void push(int size, int stride, int offset);
     };
 } // namespace duffte
 
