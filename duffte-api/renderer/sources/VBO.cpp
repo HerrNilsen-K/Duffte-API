@@ -11,7 +11,7 @@ namespace duffte
         bind();
         glBufferData(GL_ARRAY_BUFFER,
                      (GLsizeiptr)sizeof(vboCoords) * p_coordsNum,
-                     (void *)&p_coords[0],
+                     p_coords,
                      GL_STATIC_DRAW);
     }
 

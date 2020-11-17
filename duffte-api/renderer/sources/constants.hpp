@@ -5,8 +5,11 @@
 namespace duffte
 {
     enum constant{
-        vertCoords = sizeof(duffte::vertPos),
-        vertOffset = sizeof(duffte::vertPos)
+        vertSize = sizeof(duffte::vertPos) / sizeof(duffte::vertPos::x),
+        texSize = sizeof(duffte::texPos) / sizeof(duffte::texPos::x),
+        vertOffset = 0,
+        texOffset = sizeof(duffte::vertPos),
+        coordStride = sizeof(duffte::vboCoords)
     };
 } //namespace duffte
 
