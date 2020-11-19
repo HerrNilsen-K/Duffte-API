@@ -4,8 +4,9 @@
 #include <iostream>
 
 //Error log for debuging
-#define ERROR_LOG(x)                                 \
-    std::cout << (x) << ' ' << __FILE__ << std::endl \
-              << __LINE__ << std::endl
+#define ERROR_LOG(x)                               \
+    std::cout << (x) << std::endl                  \
+              << "File: " << __FILE__ << std::endl \
+              << "Line: " << __LINE__ << std::endl
 
 #endif // __UTIL_H__
