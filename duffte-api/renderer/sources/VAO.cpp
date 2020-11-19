@@ -5,39 +5,37 @@
 namespace duffte
 {
     VAO::VAO()
-        : m_vertexArrayAttributeCounter(0)
     {
-        glGenVertexArrays(1, &m_vao);
     }
 
     VAO::~VAO()
     {
-        unbind();
-        glDeleteVertexArrays(1, &m_vao);
     }
 
     void VAO::bind()
     {
-        glBindVertexArray(m_vao);
+        m_vaoContainer.value().bind();
     }
 
     void VAO::unbind()
     {
-        glBindVertexArray(0);
+        m_vaoContainer.value().unbind();
     }
 
-    void VAO::push(int p_size, int p_stride, int p_offset)
+    VAO &VAO::push(int p_size, int p_stride, int p_offset)
     {
-        std::cout << p_size << ' ' << p_stride << ' ' << p_offset << std::endl;
-        glVertexAttribPointer(m_vertexArrayAttributeCounter,
-                              p_size, GL_FLOAT,
-                              false, p_stride, (void *)p_offset);
-        enableVertexArray();
-        m_vertexArrayAttributeCounter++;
+        static bool first = true;
+        if (first)
+        {
+            m_vaoContainer.emplace();   //Emplace only on the first push call
+            first = !first;
+        }
+        m_vaoContainer.value().push(p_size, p_stride, p_offset);
+        return *this;
     }
 
     void VAO::enableVertexArray()
     {
-        glEnableVertexAttribArray(m_vertexArrayAttributeCounter);
+        m_vaoContainer.value().enableVertexArray();
     }
 } // namespace duffte

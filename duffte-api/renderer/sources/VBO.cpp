@@ -2,32 +2,32 @@
 #include "../../util.hpp"
 #include <GL/glew.h>
 #include "VBOHelper.hpp"
+#include <iostream>
 
 namespace duffte
 {
-    VBO::VBO(vboCoords *p_coords, int p_coordsNum)
+    VBO::VBO()
     {
-        glGenBuffers(1, &m_buffer);
-        bind();
-        glBufferData(GL_ARRAY_BUFFER,
-                     (GLsizeiptr)sizeof(vboCoords) * p_coordsNum,
-                     p_coords,
-                     GL_STATIC_DRAW);
     }
 
     VBO::~VBO()
     {
-        unbind();
-        glDeleteBuffers(1, &m_buffer);
+    }
+
+    VBO &VBO::data(vboCoords *p_coords, int p_coordsNum)
+    {
+        m_vboContainer.emplace();
+        m_vboContainer.value().data(p_coords, p_coordsNum);
+        return *this;
     }
 
     void VBO::bind()
     {
-        glBindBuffer(GL_ARRAY_BUFFER, m_buffer);
+        m_vboContainer.value().bind();
     }
 
     void VBO::unbind()
     {
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        m_vboContainer.value().unbind();
     }
 } // namespace duffte

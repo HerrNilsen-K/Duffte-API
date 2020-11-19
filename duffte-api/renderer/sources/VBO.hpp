@@ -1,24 +1,27 @@
 #ifndef __VBO_HPP__
 #define __VBO_HPP__
 
+#include "vboImpl.hpp"
 #include "VBOHelper.hpp"
+#include <optional>
 
 namespace duffte
 {
     class VBO
     {
     private:
-        unsigned int m_buffer;
+        std::optional<duffte::vboImpl> m_vboContainer;
 
     public:
-        VBO() = delete;
-        VBO(vboCoords *coords, int coordsNum);
+        VBO();
         ~VBO();
 
         //Bind the buffer
         void bind();
         //Unbind the buffer
         void unbind();
+        //Fill buffer with data
+        VBO &data(vboCoords *coords, int coordsNum);
     };
 } // namespace duffte
 

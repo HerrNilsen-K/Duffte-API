@@ -1,17 +1,21 @@
 #ifndef __SHADER_HPP__
 #define __SHADER_HPP__
-#include <string>
+
+#include "shaderImpl.hpp"
+#include <optional>
 
 namespace duffte
 {
     class SHADER
     {
     private:
-       unsigned int m_shaderProgram; 
+        std::optional<duffte::shaderImpl> m_shaderContainer;
+
     public:
-        SHADER(const char *vertex, const char *fragment);
+        SHADER();
         ~SHADER();
 
+        void shaders(const char *vertex, const char *fragment);
         void use();
     };
 } // namespace duffte

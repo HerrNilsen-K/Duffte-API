@@ -10,10 +10,10 @@ namespace duffte
         windowOBJ.setDimensions(width, height);
         windowOBJ.createWindow(name);
         windowOBJ.makeContextCurrent();
+        glewInit();
         //Set user pointer to access "this" in "staticResizeCall"
         glfwSetWindowUserPointer(windowOBJ.ID(), reinterpret_cast<void *>(this));
         glfwSetWindowSizeCallback(windowOBJ.ID(), staticResizeCall);
-        glewInit();
     }
 
     void gameWindow::startEngine()

@@ -19,7 +19,7 @@ namespace duffte
         bool startRenderLoop();
 
     public:
-        //Constructor alternative
+        //Arguments for window creation
         void init(int width, int height, std::string name);
 
         //Starts the loop of he window, must be called at the end of the constructor,
@@ -32,6 +32,8 @@ namespace duffte
         virtual void mainLoop() = 0;
         //Will be called when the window is closed
         virtual void onExit() = 0;
+
+        virtual ~gameWindow(){}
     };
 } // namespace duffte
 

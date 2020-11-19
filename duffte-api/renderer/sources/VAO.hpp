@@ -1,13 +1,15 @@
 #ifndef __VAO_HPP__
 #define __VAO_HPP__
 
+#include "vaoImpl.hpp"
+#include <optional>
+
 namespace duffte
 {
     class VAO
     {
     private:
-        unsigned int m_vao;
-        short m_vertexArrayAttributeCounter;
+        std::optional<duffte::vaoImpl> m_vaoContainer;
 
     private:
         void enableVertexArray();
@@ -19,7 +21,7 @@ namespace duffte
         void bind();
         void unbind();
 
-        void push(int size, int stride, int offset);
+        VAO &push(int size, int stride, int offset);
     };
 } // namespace duffte
 
