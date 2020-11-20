@@ -28,7 +28,6 @@ namespace duffte
 
     void vaoImpl::push(int p_size, int p_stride, int p_offset)
     {
-        std::cout << p_size << ' ' << p_stride << ' ' << p_offset << std::endl;
         glVertexAttribPointer(m_vertexArrayAttributeCounter,
                               p_size, GL_FLOAT,
                               false, p_stride, reinterpret_cast<void *>(p_offset));
