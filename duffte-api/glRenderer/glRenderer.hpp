@@ -1,9 +1,10 @@
-#ifndef __RENDERER_HPP__
-#define __RENDERER_HPP__
+#ifndef __GLRENDERER_HPP__
+#define __GLRENDERER_HPP__
 
 #include "sources/VBO.hpp"
 #include "sources/VBOHelper.hpp"
 #include "sources/VAO.hpp"
 #include "sources/SHADER.hpp"
+#include "sources/renderer.hpp"
 
-#endif // __RENDERER_H__
+#endif // __GLRENDERER_H__

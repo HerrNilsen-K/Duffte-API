@@ -51,8 +51,7 @@ public:
 
     virtual void mainLoop()
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        duffte::renderer::rawRendering(vbo, vao, shader);
     }
 
     virtual void onExit()
