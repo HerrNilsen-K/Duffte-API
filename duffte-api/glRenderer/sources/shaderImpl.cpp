@@ -62,4 +62,19 @@ namespace duffte
     {
         glUseProgram(m_shaderProgram);
     }
+    
+    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2) 
+    {
+        glUniform2f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2);    
+    }
+    
+    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2, float p_p3) 
+    {
+        glUniform3f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2, p_p3);    
+    }
+    
+    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2, float p_p3, float p_p4) 
+    {
+        glUniform4f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2, p_p3, p_p4);    
+    }
 } // namespace duffte

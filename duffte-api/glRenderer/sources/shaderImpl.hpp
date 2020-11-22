@@ -16,6 +16,10 @@ namespace duffte
 
         void shaders(const char *vertex, const char *fragment);
         void use();
+
+        void setVec(const char *name, float p1, float p2);
+        void setVec(const char *name, float p1, float p2, float p3);
+        void setVec(const char *name, float p1, float p2, float p3, float p4);
     };
 } // namespace duffte
 

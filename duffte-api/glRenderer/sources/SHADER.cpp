@@ -27,4 +27,21 @@ namespace duffte
     {
         m_shaderContainer.value().use();
     }
+    
+    void SHADER::setVec(const char *name, float p_p1, float p_p2) 
+    {
+       m_shaderContainer.value().setVec(name, p_p1, p_p2); 
+    }
+    
+    void SHADER::setVec(const char *name, float p_p1, float p_p2, float p_p3) 
+    {
+        
+       m_shaderContainer.value().setVec(name, p_p1, p_p2, p_p3); 
+    }
+    
+    void SHADER::setVec(const char *name, float p_p1, float p_p2, float p_p3, float p_p4) 
+    {
+        
+       m_shaderContainer.value().setVec(name, p_p1, p_p2, p_p3, p_p4); 
+    }
 } // namespace duffte

@@ -8,7 +8,7 @@
 namespace duffte{
     class renderer{
         public:
-        static void rawRendering(VBO &vbo, VAO &vao, SHADER &shader);
+        static void rawRendering(VBO &vbo, VAO &vao, SHADER &shader, unsigned int vertecies);
     };
 }
 

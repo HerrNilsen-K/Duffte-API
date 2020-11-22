@@ -32,14 +32,15 @@ public:
             "layout (location = 1) in vec2 non; \n"
             "void main()\n"
             "{\n"
-            "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+            "   gl_Position = vec4(aPos, 1.0);\n"
             "}\0";
         const char *fragmentShaderSource =
             "#version 330 core\n"
             "out vec4 FragColor;\n"
+            "uniform vec2 u_col;\n"
             "void main()\n"
             "{\n"
-            "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+            "   FragColor = vec4(u_col.x, u_col.y, 0.2f, 1.0f);\n"
             "}\n\0";
 
         vbo.data(coords, sizeof(coords) / sizeof(*coords))
@@ -51,7 +52,10 @@ public:
 
     virtual void mainLoop()
     {
-        duffte::renderer::rawRendering(vbo, vao, shader);
+        static float r = 0;
+        r += 0.0001;
+        shader.setVec("u_col", r, 0);
+        duffte::renderer::rawRendering(vbo, vao, shader, 3);
     }
 
     virtual void onExit()
@@ -62,11 +66,9 @@ public:
 
 int main(int argc, const char **argv)
 {
-    //Glew Doesn't initilize because there is no opengl context
     game *p_game = new class game(argc, argv);
     p_game->init(400, 400, "test");
     p_game->startEngine();
     delete p_game;
-    //Render stuff in a render loop
     return 0;
 }
