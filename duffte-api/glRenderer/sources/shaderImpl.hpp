@@ -2,24 +2,28 @@
 #define __SHADERIMPL_HPP__
 
 #include <string>
+#include <GLM/mat4x4.hpp>
 
 namespace duffte
 {
     class shaderImpl
     {
-    private:
+    public:
         unsigned int m_shaderProgram;
 
     public:
         shaderImpl();
         ~shaderImpl();
 
+        //Create the program
         void shaders(const char *vertex, const char *fragment);
         void use();
-
+        //Uniform setters
         void setVec(const char *name, float p1, float p2);
         void setVec(const char *name, float p1, float p2, float p3);
         void setVec(const char *name, float p1, float p2, float p3, float p4);
+
+        void setMat(const char *name, glm::mat4 matrix);
     };
 } // namespace duffte
 

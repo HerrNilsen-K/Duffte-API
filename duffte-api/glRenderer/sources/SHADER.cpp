@@ -44,4 +44,9 @@ namespace duffte
         
        m_shaderContainer.value().setVec(name, p_p1, p_p2, p_p3, p_p4); 
     }
+    
+    void SHADER::setMat(const char *p_name, glm::mat4 p_matrix) 
+    {
+       m_shaderContainer.value().setMat(p_name, p_matrix); 
+    }
 } // namespace duffte

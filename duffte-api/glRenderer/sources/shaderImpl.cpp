@@ -1,6 +1,9 @@
 #include "shaderImpl.hpp"
 #include <GL/glew.h>
 #include <iostream>
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp>
+#include <GLM/gtc/type_ptr.hpp>
 
 namespace duffte
 {
@@ -62,19 +65,24 @@ namespace duffte
     {
         glUseProgram(m_shaderProgram);
     }
-    
-    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2) 
+
+    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2)
     {
-        glUniform2f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2);    
+        glUniform2f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2);
     }
-    
-    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2, float p_p3) 
+
+    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2, float p_p3)
     {
-        glUniform3f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2, p_p3);    
+        glUniform3f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2, p_p3);
     }
-    
-    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2, float p_p3, float p_p4) 
+
+    void shaderImpl::setVec(const char *p_name, float p_p1, float p_p2, float p_p3, float p_p4)
     {
-        glUniform4f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2, p_p3, p_p4);    
+        glUniform4f(glGetUniformLocation(this->m_shaderProgram, p_name), p_p1, p_p2, p_p3, p_p4);
+    }
+
+    void shaderImpl::setMat(const char *p_name, glm::mat4 p_matrix)
+    {
+        glUniformMatrix4fv(glGetUniformLocation(this->m_shaderProgram, p_name), 1, GL_FALSE, glm::value_ptr(p_matrix));
     }
 } // namespace duffte

@@ -4,11 +4,12 @@
 #include "VBO.hpp"
 #include "VAO.hpp"
 #include "SHADER.hpp"
+#include "TEXTURE.hpp"
 
 namespace duffte{
     class renderer{
         public:
-        static void rawRendering(VBO &vbo, VAO &vao, SHADER &shader, unsigned int vertecies);
+        static void rawRendering(VBO &vbo, VAO &vao, SHADER &shader, TEXTURE &texture, unsigned int vertecies);
     };
 }
 

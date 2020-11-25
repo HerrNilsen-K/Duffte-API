@@ -6,5 +6,6 @@
 #include "sources/VAO.hpp"
 #include "sources/SHADER.hpp"
 #include "sources/renderer.hpp"
+#include "sources/TEXTURE.hpp"
 
 #endif // __GLRENDERER_H__
