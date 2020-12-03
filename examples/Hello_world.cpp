@@ -26,82 +26,82 @@ public:
 
         std::cout << "Engine has started\n";
         duffte::vboCoords coords[] = {
-            {{-200, -200, 200},
+            {{-1, -1, 1},
              {0, 0}},
-            {{-200, 200, 200},
+            {{-1, 1, 1},
              {0, 1}},
-            {{200, 200, 200},
+            {{1, 1, 1},
              {1, 1}},
-            {{200, 200, 200},
+            {{1, 1, 1},
              {1, 1}},
-            {{200, -200, 200},
+            {{1, -1, 1},
              {1, 0}},
-            {{-200, -200, 200},
+            {{-1, -1, 1},
              {0, 0}},
 
-            {{-200, -200, 200},
+            {{-1, -1, 1},
              {0, 1}},
-            {{-200, 200, 200},
+            {{-1, 1, 1},
              {1, 1}},
-            {{-200, -200, -200},
+            {{-1, -1, -1},
              {0, 0}},
-            {{-200, 200, 200},
+            {{-1, 1, 1},
              {1, 1}},
-            {{-200, 200, -200},
+            {{-1, 1, -1},
              {1, 0}},
-            {{-200, -200, -200},
+            {{-1, -1, -1},
              {0, 0}},
 
-            {{-200, -200, -200},
+            {{-1, -1, -1},
              {0, 0}},
-            {{-200, 200, -200},
+            {{-1, 1, -1},
              {0, 1}},
-            {{200, 200, -200},
+            {{1, 1, -1},
              {1, 1}},
-            {{200, 200, -200},
+            {{1, 1, -1},
              {1, 1}},
-            {{200, -200, -200},
+            {{1, -1, -1},
              {1, 0}},
-            {{-200, -200, -200},
+            {{-1, -1, -1},
              {0, 0}},
 
-            {{200, -200, 200},
+            {{1, -1, 1},
              {0, 1}},
-            {{200, 200, 200},
+            {{1, 1, 1},
              {1, 1}},
-            {{200, -200, -200},
+            {{1, -1, -1},
              {0, 0}},
-            {{200, 200, 200},
+            {{1, 1, 1},
              {1, 1}},
-            {{200, 200, -200},
+            {{1, 1, -1},
              {1, 0}},
-            {{200, -200, -200},
+            {{1, -1, -1},
              {0, 0}},
 
-            {{-200, 200, 200},
+            {{-1, 1, 1},
              {0, 1}},
-            {{-200, 200, -200},
+            {{-1, 1, -1},
              {0, 0}},
-            {{200, 200, 200},
+            {{1, 1, 1},
              {1, 1}},
-            {{200, 200, -200},
+            {{1, 1, -1},
              {1, 0}},
-            {{-200, 200, -200},
+            {{-1, 1, -1},
              {0, 0}},
-            {{200, 200, 200},
+            {{1, 1, 1},
              {1, 1}},
 
-            {{-200, -200, 200},
+            {{-1, -1, 1},
              {0, 1}},
-            {{-200, -200, -200},
+            {{-1, -1, -1},
              {0, 0}},
-            {{200, -200, 200},
+            {{1, -1, 1},
              {1, 1}},
-            {{200, -200, -200},
+            {{1, -1, -1},
              {1, 0}},
-            {{-200, -200, -200},
+            {{-1, -1, -1},
              {0, 0}},
-            {{200, -200, 200},
+            {{1, -1, 1},
              {1, 1}}};
 
         const char *vertexShaderSource =
@@ -136,12 +136,42 @@ public:
 
     virtual void mainLoop()
     {
+        glm::mat4 rot = glm::mat4(1.0f);
+        rot = glm::rotate(rot, glm::radians((float)glfwGetTime()) * 50, glm::vec3(0.0f, 1.0f, 0.0f));
+        rot = glm::rotate(rot, glm::radians((float)glfwGetTime()) * 50, glm::vec3(0.0f, 1.0f, 1.0f));
+        float angle = 20.0f * float(1);
+        rot = glm::rotate(rot, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
         glm::mat4 trans = glm::mat4(1.0f);
-        trans = glm::rotate(trans, glm::radians((float)glfwGetTime()) * 50, glm::vec3(0.0f, 1.0f, 0.0f));
-        trans = glm::rotate(trans, glm::radians((float)glfwGetTime()) * 50, glm::vec3(0.0f, 1.0f, 1.0f));
-        //trans = glm::translate(trans, glm::vec3(0.0f, (float) std::sin(glfwGetTime()), 0.0f));
-        glm::mat4 proj = glm::ortho(-400.0f, 400.0f, -400.0f, 400.0f, -400.0f, 400.0f);
-        shader.setMat("matrix", proj * trans);
+        //trans = glm::translate(trans, glm::vec3(1.5f, 0.0f, 0.0f));
+        float orth = 3.0f;
+
+        glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+        glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+        glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
+
+        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
+
+        glm::vec3 cameraUP = glm::cross(cameraDirection, cameraRight);
+        glm::mat4 proj;
+
+        if (duffte::gameWindow::getCurrentKey() == duffte::key::E && duffte::gameWindow::getCurrentKeyMode() == GLFW_PRESS)
+        {
+            proj = glm::ortho(-orth, orth, -orth, orth, -orth, orth);
+        }
+        else
+        {
+            orth = 4.0f;
+            proj = glm::ortho(-orth, orth, -orth, orth, -orth, orth);
+        }
+
+        const float radius = 10.0f;
+        float camX = sin(glfwGetTime()) * radius;
+        float camZ = cos(glfwGetTime()) * radius;
+        glm::mat4 view;
+        view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
+
+        shader.setMat("matrix", rot * proj * trans);
         duffte::renderer::rawRendering(vbo, vao, shader, texture, 36);
         glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
     }

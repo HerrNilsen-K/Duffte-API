@@ -2,21 +2,12 @@
 #define __GAMEWINDOWHANDLER_H__
 
 #include "mainWindowHandler.hpp"
+#include "../../glRenderer/sources/constants.hpp"
 
 namespace duffte
 {
     class gameWindow
     {
-    protected:
-        Window windowOBJ;
-
-    private:
-        //Creates the resize call for GLFW and forwards to "resizeCall(int, int)"
-        static void staticResizeCall(GLFWwindow *window, int width, int height);
-        void resizeCall(int width, int height);
-
-        //Calls mainLoop every 1/60 sec / every frame
-        bool startRenderLoop();
 
     public:
         //Arguments for window creation
@@ -33,7 +24,28 @@ namespace duffte
         //Will be called when the window is closed
         virtual void onExit() = 0;
 
-        virtual ~gameWindow(){}
+        virtual ~gameWindow() {}
+
+    public:
+        duffte::key getCurrentKey();
+        int getCurrentKeyMode();
+
+    private:
+        Window m_window;
+        key m_currentKey;
+        int m_currentKeyMode;
+
+    private:
+        //"resizeCall" gets calledwhen the window is being resized, and calls "mainLoopContainer"
+        void resizeCall(int width, int height);
+
+        //Callback to recieve the currently pressed key
+        void keyCall(int key, int scancode, int action, int mods);
+        //Calls mainLoop every 1/60 sec / every frame
+        bool startRenderLoop();
+
+        //Calls all rendering functions
+        void render();
     };
 } // namespace duffte
 
