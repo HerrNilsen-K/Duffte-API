@@ -1,5 +1,6 @@
 #include "renderer.hpp"
-#include "GL/glew.h"
+#define GLEW_STATIC
+#include <GL/glew.h>
 #include <iostream>
 
 namespace duffte

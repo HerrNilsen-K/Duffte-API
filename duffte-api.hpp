@@ -4,5 +4,6 @@
 #include "duffte-api/window/window.hpp"
 #include "duffte-api/glRenderer/glRenderer.hpp"
 #include "duffte-api/glRenderer/sources/constants.hpp"
+#include "duffte-api/primitives/primitives.hpp"
 
 #endif // __DUFFTE-API_H__

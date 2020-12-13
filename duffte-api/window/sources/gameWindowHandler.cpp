@@ -1,3 +1,4 @@
+#define GLEW_STATIC       
 #include <GL/glew.h>
 #include "gameWindowHandler.hpp"
 #include "../../util.hpp"
@@ -5,11 +6,15 @@
 
 namespace duffte
 {
-    void gameWindow::init(int width, int height, std::string name)
+    void gameWindow::init(int p_width, int p_height, std::string p_name, int p_flags)
     {
-        m_window.setDimensions(width, height);
-        m_window.createWindow(name);
+        m_window.setDimensions(p_width, p_height);
+        m_window.setTitle(p_name);
+        m_window.createWindow();
         m_window.makeContextCurrent();
+
+        m_hold = false;
+        m_flags = 0;
 
         glewInit();
         //Set user pointer to access "this" in "staticResizeCall"
@@ -32,6 +37,10 @@ namespace duffte
             else
                 ERROR_LOG("Error: gw in duffte::gameWindow::init() glfwSetKeyCallback() == NULL");
         });
+        if (p_flags & flags::GRAPHICS)
+            m_flags |= GL_COLOR_BUFFER_BIT;
+        if (p_flags & flags::DRAW_3D)
+            m_flags |= GL_DEPTH_BUFFER_BIT;
     }
 
     void gameWindow::startEngine()
@@ -51,6 +60,11 @@ namespace duffte
         return m_currentKeyMode;
     }
 
+    bool gameWindow::keyIsHeld()
+    {
+        return m_hold;
+    }
+
     bool gameWindow::startRenderLoop()
     {
         while (m_window.runs())
@@ -60,24 +74,32 @@ namespace duffte
         return true;
     }
 
-    void gameWindow::render()
-    {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        mainLoop();
-        m_window.swapBuffers();
-        m_window.pollEvents();
-    }
-
     void gameWindow::resizeCall(int width, int height)
     {
         render();
         glViewport(0, 0, width, height);
     }
 
+    void gameWindow::render()
+    {
+        glClear(m_flags);
+        mainLoop();
+        m_window.swapBuffers();
+        m_window.pollEvents();
+    }
+
     void gameWindow::keyCall(int key, int scancode, int action, int mods)
     {
         m_currentKey = (duffte::key)key;
         m_currentKeyMode = action;
+        if (action == GLFW_PRESS)
+        {
+            m_hold = true;
+        }
+        else if (action == GLFW_RELEASE)
+        {
+            m_hold = false;
+        }
     }
 
 } // namespace duffte

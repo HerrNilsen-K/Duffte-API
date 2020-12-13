@@ -1,9 +1,18 @@
 #ifndef __CONSTANTS_HPP__
 #define __CONSTANTS_HPP__
+
 #include "VBOHelper.hpp"
+#include <GLFW/glfw3.h>
 
 namespace duffte
 {
+    //Flags for "init()" in "gameWIndow"
+    enum flags
+    {
+        GRAPHICS = 1 << 0,
+        DRAW_3D = 1 << 1
+    };
+
     //Temorary constants for the openGL pipeline creation
     enum constant
     {
@@ -14,7 +23,7 @@ namespace duffte
         coordStride = sizeof(duffte::vboCoords)
     };
 
-//Value of all keyboard keys
+    //Value of all keyboard keys
     enum key
     {
         A = GLFW_KEY_A,

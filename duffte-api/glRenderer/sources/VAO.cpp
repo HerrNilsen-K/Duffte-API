@@ -1,4 +1,5 @@
 #include "VAO.hpp"
+#define GLEW_STATIC       
 #include <GL/glew.h>
 #include <iostream>
 
@@ -27,7 +28,7 @@ namespace duffte
         static bool first = true;
         if (first)
         {
-            m_vaoContainer.emplace();   //Emplace only on the first push call
+            m_vaoContainer.emplace(); //Emplace only on the first push call
             first = !first;
         }
         m_vaoContainer.value().push(p_size, p_stride, p_offset);

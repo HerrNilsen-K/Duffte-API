@@ -1,6 +1,7 @@
 #ifndef __MAINWINDOWHANDLER_H__
 #define __MAINWINDOWHANDLER_H__
 
+#define GLEW_STATIC       
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <string>
@@ -9,9 +10,6 @@ namespace duffte
 {
     class Window
     {
-    private:
-        GLFWwindow *windowID;
-        int width, height, posX, posY;
 
     public:
         Window();
@@ -24,11 +22,16 @@ namespace duffte
         void setDimensions(int width, int height);
         //Sets the X and Y position of the window
         void setPosition(int posX, int posY);
+        //Set the title of the window
+        void setTitle(const std::string &title);
 
         //Creates and dissplays the window
-        void createWindow(std::string windowTitle);
+        void createWindow();
         //Makes context to current
         void makeContextCurrent();
+
+        //Changes the title
+        void changeTitle(const std::string &title);
 
         //Returns true as long as the window is opend
         bool runs();
@@ -36,6 +39,10 @@ namespace duffte
         void swapBuffers();
         //Polls events
         void pollEvents();
+    private:
+        GLFWwindow *windowID;
+        int width, height, posX, posY;
+        std::string m_title;
     };
 } // namespace duffte
 

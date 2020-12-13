@@ -1,4 +1,5 @@
 #include "shaderImpl.hpp"
+#define GLEW_STATIC
 #include <GL/glew.h>
 #include <iostream>
 #include <GLM/glm.hpp>

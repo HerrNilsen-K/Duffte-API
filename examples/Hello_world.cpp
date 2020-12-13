@@ -3,16 +3,64 @@
 #include <GLM/gtc/matrix_transform.hpp>
 #include <GLM/gtc/type_ptr.hpp>
 #include <iostream>
-#include <cmath>
+
+void MessageCallback(GLenum source,
+                     GLenum type,
+                     GLuint id,
+                     GLenum severity,
+                     GLsizei length,
+                     const GLchar *message,
+                     const void *userParam)
+{
+
+    std::cout << "---------------------opengl-callback-start------------" << std::endl;
+    std::cout << "message: " << message << std::endl;
+    std::cout << "type: ";
+    switch (type)
+    {
+    case GL_DEBUG_TYPE_ERROR:
+        std::cout << "ERROR";
+        break;
+    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
+        std::cout << "DEPRECATED_BEHAVIOR";
+        break;
+    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+        std::cout << "UNDEFINED_BEHAVIOR";
+        break;
+    case GL_DEBUG_TYPE_PORTABILITY:
+        std::cout << "PORTABILITY";
+        break;
+    case GL_DEBUG_TYPE_PERFORMANCE:
+        std::cout << "PERFORMANCE";
+        break;
+    case GL_DEBUG_TYPE_OTHER:
+        std::cout << "OTHER";
+        break;
+    }
+    std::cout << std::endl;
+
+    std::cout << "id: " << id << std::endl;
+    std::cout << "severity: ";
+    switch (severity)
+    {
+    case GL_DEBUG_SEVERITY_LOW:
+        std::cout << "LOW";
+        break;
+    case GL_DEBUG_SEVERITY_MEDIUM:
+        std::cout << "MEDIUM";
+        break;
+    case GL_DEBUG_SEVERITY_HIGH:
+        std::cout << "HIGH";
+        break;
+    }
+    std::cout << std::endl;
+    std::cout << "---------------------opengl-callback-end--------------" << std::endl
+              << std::endl;
+}
 
 class game : public duffte::gameWindow
 {
 public:
-    duffte::VBO vbo;
-    duffte::VAO vao;
-    duffte::SHADER shader;
-    duffte::TEXTURE texture;
-
     game(int argc, const char **argv)
     {
     }
@@ -20,160 +68,39 @@ public:
     virtual void
     onStart()
     {
-        for (int i = 0; i < 255; i++)
-        {
-        }
+        //glEnable(GL_DEBUG_OUTPUT);
+        //glDebugMessageCallback(MessageCallback, 0);
 
         std::cout << "Engine has started\n";
-        duffte::vboCoords coords[] = {
-            {{-1, -1, 1},
-             {0, 0}},
-            {{-1, 1, 1},
-             {0, 1}},
-            {{1, 1, 1},
-             {1, 1}},
-            {{1, 1, 1},
-             {1, 1}},
-            {{1, -1, 1},
-             {1, 0}},
-            {{-1, -1, 1},
-             {0, 0}},
-
-            {{-1, -1, 1},
-             {0, 1}},
-            {{-1, 1, 1},
-             {1, 1}},
-            {{-1, -1, -1},
-             {0, 0}},
-            {{-1, 1, 1},
-             {1, 1}},
-            {{-1, 1, -1},
-             {1, 0}},
-            {{-1, -1, -1},
-             {0, 0}},
-
-            {{-1, -1, -1},
-             {0, 0}},
-            {{-1, 1, -1},
-             {0, 1}},
-            {{1, 1, -1},
-             {1, 1}},
-            {{1, 1, -1},
-             {1, 1}},
-            {{1, -1, -1},
-             {1, 0}},
-            {{-1, -1, -1},
-             {0, 0}},
-
-            {{1, -1, 1},
-             {0, 1}},
-            {{1, 1, 1},
-             {1, 1}},
-            {{1, -1, -1},
-             {0, 0}},
-            {{1, 1, 1},
-             {1, 1}},
-            {{1, 1, -1},
-             {1, 0}},
-            {{1, -1, -1},
-             {0, 0}},
-
-            {{-1, 1, 1},
-             {0, 1}},
-            {{-1, 1, -1},
-             {0, 0}},
-            {{1, 1, 1},
-             {1, 1}},
-            {{1, 1, -1},
-             {1, 0}},
-            {{-1, 1, -1},
-             {0, 0}},
-            {{1, 1, 1},
-             {1, 1}},
-
-            {{-1, -1, 1},
-             {0, 1}},
-            {{-1, -1, -1},
-             {0, 0}},
-            {{1, -1, 1},
-             {1, 1}},
-            {{1, -1, -1},
-             {1, 0}},
-            {{-1, -1, -1},
-             {0, 0}},
-            {{1, -1, 1},
-             {1, 1}}};
-
-        const char *vertexShaderSource =
-            "#version 330 core\n"
-            "layout (location = 0) in vec3 aPos;\n"
-            "layout (location = 1) in vec2 inTexPos;\n"
-            "out vec2 aTexPos;\n"
-            "uniform mat4 matrix;\n"
-            "void main()\n"
-            "{\n"
-            "aTexPos = inTexPos;\n"
-            "   gl_Position = vec4(aPos, 1.0) * matrix;\n"
-            "}\0";
-        const char *fragmentShaderSource =
-            "#version 330 core\n"
-            "out vec4 FragColor;\n"
-            "in vec2 aTexPos;\n"
-            "uniform sampler2D tex;\n"
-            "void main()\n"
-            "{\n"
-            "   FragColor = texture(tex, aTexPos);\n"
-            "}\n\0";
-
-        vbo.data(coords, sizeof(coords) / sizeof(*coords))
-            .bind();
-        vao.push(duffte::constant::vertSize, duffte::constant::coordStride, duffte::constant::vertOffset);
-        vao.push(duffte::constant::texSize, duffte::constant::coordStride, duffte::constant::texOffset);
-        shader.shaders(vertexShaderSource, fragmentShaderSource);
-        texture.path("panda.jpg");
-        glEnable(GL_DEPTH_TEST);
+        glfwSwapInterval(1);
     }
+
+    double lastTime = glfwGetTime();
+    int nbFrames = 0;
 
     virtual void mainLoop()
     {
-        glm::mat4 rot = glm::mat4(1.0f);
-        rot = glm::rotate(rot, glm::radians((float)glfwGetTime()) * 50, glm::vec3(0.0f, 1.0f, 0.0f));
-        rot = glm::rotate(rot, glm::radians((float)glfwGetTime()) * 50, glm::vec3(0.0f, 1.0f, 1.0f));
-        float angle = 20.0f * float(1);
-        rot = glm::rotate(rot, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-        glm::mat4 trans = glm::mat4(1.0f);
-        //trans = glm::translate(trans, glm::vec3(1.5f, 0.0f, 0.0f));
-        float orth = 3.0f;
-
-        glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
-        glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
-        glm::vec3 cameraDirection = glm::normalize(cameraPos - cameraTarget);
-
-        glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-        glm::vec3 cameraRight = glm::normalize(glm::cross(up, cameraDirection));
-
-        glm::vec3 cameraUP = glm::cross(cameraDirection, cameraRight);
-        glm::mat4 proj;
-
-        if (duffte::gameWindow::getCurrentKey() == duffte::key::E && duffte::gameWindow::getCurrentKeyMode() == GLFW_PRESS)
+        static double i = 0, j = -0.5;
+        duffte::triangle2D(-1, 1, 0, 0, -1, -1);
+        duffte::triangle2D(i, 0.5, i + .5, -0.5, j, -0.5, {.5, .2, .1});
+        i += 0.005;
+        j += 0.005;
+        if (j >= 1)
         {
-            proj = glm::ortho(-orth, orth, -orth, orth, -orth, orth);
-        }
-        else
-        {
-            orth = 4.0f;
-            proj = glm::ortho(-orth, orth, -orth, orth, -orth, orth);
+            i = -1.5;
+            j = -2;
         }
 
-        const float radius = 10.0f;
-        float camX = sin(glfwGetTime()) * radius;
-        float camZ = cos(glfwGetTime()) * radius;
-        glm::mat4 view;
-        view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
-
-        shader.setMat("matrix", rot * proj * trans);
-        duffte::renderer::rawRendering(vbo, vao, shader, texture, 36);
-        glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+        double currentTime = glfwGetTime();
+        nbFrames++;
+        if (currentTime - lastTime >= 1)
+        { // If last prinf() was more than 1 sec ago
+            // printf and reset timer
+            std::string title = std::to_string(nbFrames);
+            duffte::gameWindow::m_window.changeTitle(title);
+            nbFrames = 0;
+            lastTime += 1.0;
+        }
     }
 
     virtual void onExit()
@@ -185,7 +112,7 @@ public:
 int main(int argc, const char **argv)
 {
     game *p_game = new class game(argc, argv);
-    p_game->init(400, 400, "Hello World");
+    p_game->init(400, 400, "Hello World", duffte::flags::GRAPHICS | duffte::flags::DRAW_3D);
     p_game->startEngine();
     delete p_game;
     return 0;

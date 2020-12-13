@@ -31,14 +31,24 @@ namespace duffte
         this->posY = posY;
     }
 
-    void Window::createWindow(std::string windowTitle)
+    void Window::setTitle(const std::string &p_title)
     {
-        windowID = glfwCreateWindow(width, height, windowTitle.c_str(), 0, 0);
+        this->m_title = p_title;
+    }
+
+    void Window::createWindow()
+    {
+        windowID = glfwCreateWindow(width, height, m_title.c_str(), 0, 0);
     }
 
     void Window::makeContextCurrent()
     {
         glfwMakeContextCurrent(windowID);
+    }
+
+    void Window::changeTitle(const std::string &p_title)
+    {
+        glfwSetWindowTitle(windowID, p_title.c_str());
     }
 
     bool Window::runs()

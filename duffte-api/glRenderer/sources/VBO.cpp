@@ -1,5 +1,6 @@
 #include "VBO.hpp"
 #include "../../util.hpp"
+#define GLEW_STATIC       
 #include <GL/glew.h>
 #include "VBOHelper.hpp"
 #include <iostream>

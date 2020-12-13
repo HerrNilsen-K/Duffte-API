@@ -11,7 +11,7 @@ namespace duffte
 
     public:
         //Arguments for window creation
-        void init(int width, int height, std::string name);
+        void init(int width, int height, std::string name, int flags);
 
         //Starts the loop of he window, must be called at the end of the constructor,
         //that derives gameWindow
@@ -29,11 +29,15 @@ namespace duffte
     public:
         duffte::key getCurrentKey();
         int getCurrentKeyMode();
+        bool keyIsHeld();
 
-    private:
         Window m_window;
+    private:
         key m_currentKey;
         int m_currentKeyMode;
+        bool m_hold;
+
+        int m_flags;
 
     private:
         //"resizeCall" gets calledwhen the window is being resized, and calls "mainLoopContainer"
