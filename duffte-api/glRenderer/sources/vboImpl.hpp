@@ -19,7 +19,7 @@ namespace duffte
         //Unbind the buffer
         void unbind();
         //Fill buffer with data
-        vboImpl &data(vboCoords *coords, int coordsNum);
+        vboImpl &data(float *coords, int coordsNum);
     };
 } // namespace duffte
 

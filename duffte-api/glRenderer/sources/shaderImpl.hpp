@@ -2,7 +2,7 @@
 #define __SHADERIMPL_HPP__
 
 #include <string>
-#include <GLM/mat4x4.hpp>
+#include <glm/mat4x4.hpp>
 
 namespace duffte
 {

@@ -1,7 +1,7 @@
 #include "../duffte-api.hpp"
-#include <GLM/glm.hpp>
-#include <GLM/gtc/matrix_transform.hpp>
-#include <GLM/gtc/type_ptr.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
 
 void MessageCallback(GLenum source,
@@ -24,7 +24,7 @@ void MessageCallback(GLenum source,
     case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
         std::cout << "DEPRECATED_BEHAVIOR";
         break;
-    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
+    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR: 
         std::cout << "UNDEFINED_BEHAVIOR";
         break;
     case GL_DEBUG_TYPE_PORTABILITY:
@@ -68,11 +68,11 @@ public:
     virtual void
     onStart()
     {
-        //glEnable(GL_DEBUG_OUTPUT);
-        //glDebugMessageCallback(MessageCallback, 0);
+        glEnable(GL_DEBUG_OUTPUT);
+        glDebugMessageCallback(MessageCallback, 0);
 
         std::cout << "Engine has started\n";
-        glfwSwapInterval(1);
+        glfwSwapInterval(0);
     }
 
     double lastTime = glfwGetTime();

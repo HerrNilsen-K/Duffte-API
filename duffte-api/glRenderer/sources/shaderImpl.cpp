@@ -2,9 +2,10 @@
 #define GLEW_STATIC
 #include <GL/glew.h>
 #include <iostream>
-#include <GLM/glm.hpp>
-#include <GLM/gtc/matrix_transform.hpp>
-#include <GLM/gtc/type_ptr.hpp>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace duffte
 {

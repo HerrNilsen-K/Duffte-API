@@ -5,13 +5,10 @@ namespace duffte
 {
     trinagleCreation::trinagleCreation()
     {
-        duffte::vboCoords vertecies[] = {
-            {{0.0f, 1.0f, 0.0f},
-             {0, 0}},
-            {{1.0f, -1.0f, 0.0f},
-             {0, 0}},
-            {{-1.0f, -1.0f, 0.0f},
-             {0, 0}}};
+        float vertecies[] = {
+            0.0f, 1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f,
+            -1.0f, -1.0f, 0.0f};
 
         const char *vertexShaderSource =
             "#version 330 core\n"
@@ -47,8 +44,7 @@ namespace duffte
             "}\n\0";
 
         m_vbo.data(vertecies, sizeof(vertecies) / sizeof(*vertecies));
-        m_vao.push(duffte::constant::vertSize, duffte::constant::coordStride, duffte::constant::vertOffset);
-        m_vao.push(duffte::constant::texSize, duffte::constant::coordStride, duffte::constant::texOffset);
+        m_vao.push(duffte::constant::vertSize, 12, duffte::constant::vertOffset);
         m_shader.shaders(vertexShaderSource, fragmentShaderSource);
     }
 

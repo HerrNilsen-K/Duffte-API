@@ -18,11 +18,11 @@ namespace duffte
         glDeleteBuffers(1, &m_buffer);
     }
 
-    vboImpl &vboImpl::data(vboCoords *p_coords, int p_coordsNum)
+    vboImpl &vboImpl::data(float *p_coords, int p_coordsNum)
     {
         bind();
         glBufferData(GL_ARRAY_BUFFER,
-                     (GLsizeiptr)sizeof(vboCoords) * p_coordsNum,
+                     sizeof(float) * p_coordsNum,
                      p_coords,
                      GL_STATIC_DRAW);
         return *this;
