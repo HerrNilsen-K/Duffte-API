@@ -1,0 +1,11 @@
+New Features:
+	rectangle class
+	remove static primitive helper classes with an alternative
+	
+Bugs: 
+	"Window" initilizes glfw for every object
+
+Refactoring:
+	variables in classes need comments
+	The key input system is really fucked up and needs a big rework
+	Look over mainWindowHandler/gameWindow
