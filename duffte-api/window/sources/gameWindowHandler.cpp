@@ -3,6 +3,9 @@
 #include "gameWindowHandler.hpp"
 #include "../../util.hpp"
 #include <iostream>
+#include "../../primitives/primitives.hpp"
+
+extern duffte::trinagleCreation *triangleTemplate;
 
 namespace duffte
 {
@@ -41,6 +44,9 @@ namespace duffte
             m_flags |= GL_COLOR_BUFFER_BIT;
         if (p_flags & flags::DRAW_3D)
             m_flags |= GL_DEPTH_BUFFER_BIT;
+
+        //Init global primitives
+        triangleTemplate = new duffte::trinagleCreation;
     }
 
     void gameWindow::startEngine()
@@ -48,6 +54,8 @@ namespace duffte
         onStart();
         startRenderLoop();
         onExit();
+
+        terminate();
     }
 
     duffte::key gameWindow::getCurrentKey()
@@ -86,6 +94,11 @@ namespace duffte
         mainLoop();
         m_window.swapBuffers();
         m_window.pollEvents();
+    }
+    
+    void gameWindow::terminate() 
+    {
+        delete triangleTemplate;
     }
 
     void gameWindow::keyCall(int key, int scancode, int action, int mods)

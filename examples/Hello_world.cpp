@@ -72,7 +72,7 @@ public:
         glDebugMessageCallback(MessageCallback, 0);
 
         std::cout << "Engine has started\n";
-        glfwSwapInterval(0);
+        glfwSwapInterval(1);
     }
 
     double lastTime = glfwGetTime();
@@ -112,7 +112,7 @@ public:
 int main(int argc, const char **argv)
 {
     game *p_game = new class game(argc, argv);
-    p_game->init(400, 400, "Hello World", duffte::flags::GRAPHICS | duffte::flags::DRAW_3D);
+    p_game->init(400, 400, "Hello World", duffte::flags::GRAPHICS);
     p_game->startEngine();
     delete p_game;
     return 0;

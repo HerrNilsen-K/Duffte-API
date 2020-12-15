@@ -1,6 +1,5 @@
 New Features:
 	rectangle class
-	remove static primitive helper classes with an alternative
 	
 Bugs: 
 	"Window" initilizes glfw for every object

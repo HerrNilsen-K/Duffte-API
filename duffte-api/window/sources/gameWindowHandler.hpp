@@ -50,6 +50,12 @@ namespace duffte
 
         //Calls all rendering functions
         void render();
+
+
+
+
+
+        void terminate();
     };
 } // namespace duffte
 

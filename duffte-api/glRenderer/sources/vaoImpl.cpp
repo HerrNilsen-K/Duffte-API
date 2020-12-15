@@ -19,7 +19,7 @@ namespace duffte
 
     void vaoImpl::bind()
     {
-        glBindBuffer(GL_VERTEX_ARRAY, m_vao);
+        glBindVertexArray(m_vao);
     }
 
     void vaoImpl::unbind()
