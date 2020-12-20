@@ -46,7 +46,7 @@ namespace duffte
             if (gw)
                 gw->reposCall(x, y);
             else
-                ERROR_LOG("Error: gw in duffte::gameWindow::init() glfwSetKeyCallback() == NULL");
+                ERROR_LOG("Error: gw in duffte::gameWindow::init() glfwSetWindowPosCallback() == NULL");
         });
 
         if (p_flags & flags::GRAPHICS)
