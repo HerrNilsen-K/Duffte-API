@@ -1,4 +1,4 @@
-#define GLEW_STATIC       
+#define GLEW_STATIC
 #include <GL/glew.h>
 #include "gameWindowHandler.hpp"
 #include "../../util.hpp"
@@ -40,6 +40,7 @@ namespace duffte
             else
                 ERROR_LOG("Error: gw in duffte::gameWindow::init() glfwSetKeyCallback() == NULL");
         });
+
         if (p_flags & flags::GRAPHICS)
             m_flags |= GL_COLOR_BUFFER_BIT;
         if (p_flags & flags::DRAW_3D)
@@ -56,6 +57,28 @@ namespace duffte
         onExit();
 
         terminate();
+    }
+
+    void gameWindow::changeTitle(const std::string &p_title)
+    {
+        m_window.changeTitle(p_title);
+    }
+
+    void gameWindow::changeTitle(int &p_title)
+    {
+        std::string title = std::to_string(p_title);
+        m_window.changeTitle(title);
+    }
+
+    void gameWindow::changeTitle(float &p_title)
+    {
+        std::string title = std::to_string(p_title);
+        m_window.changeTitle(title);
+    }
+
+    windowSize gameWindow::getWindowSize()
+    {
+        return m_window.getWindowSize();
     }
 
     duffte::key gameWindow::getCurrentKey()
@@ -95,8 +118,8 @@ namespace duffte
         m_window.swapBuffers();
         m_window.pollEvents();
     }
-    
-    void gameWindow::terminate() 
+
+    void gameWindow::terminate()
     {
         delete triangleTemplate;
     }

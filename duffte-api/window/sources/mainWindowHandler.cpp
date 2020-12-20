@@ -4,7 +4,7 @@
 
 namespace duffte
 {
-    Window::Window() : posX(0), posY(0)
+    Window::Window() : m_posX(0), m_posY(0)
     {
         glfwInit();
     }
@@ -16,19 +16,19 @@ namespace duffte
 
     GLFWwindow *Window::ID()
     {
-        return this->windowID;
+        return this->m_window;
     }
 
-    void Window::setDimensions(int width, int height)
+    void Window::setDimensions(int m_width, int m_height)
     {
-        this->width = width;
-        this->height = height;
+        this->m_width = m_width;
+        this->m_height = m_height;
     }
 
-    void Window::setPosition(int posX, int posY)
+    void Window::setPosition(int m_posX, int m_posY)
     {
-        this->posX = posX;
-        this->posY = posY;
+        this->m_posX = m_posX;
+        this->m_posY = m_posY;
     }
 
     void Window::setTitle(const std::string &p_title)
@@ -38,27 +38,33 @@ namespace duffte
 
     void Window::createWindow()
     {
-        windowID = glfwCreateWindow(width, height, m_title.c_str(), 0, 0);
+        m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), 0, 0);
     }
 
     void Window::makeContextCurrent()
     {
-        glfwMakeContextCurrent(windowID);
+        glfwMakeContextCurrent(m_window);
     }
 
     void Window::changeTitle(const std::string &p_title)
     {
-        glfwSetWindowTitle(windowID, p_title.c_str());
+        glfwSetWindowTitle(m_window, p_title.c_str());
+    }
+
+    windowSize Window::getWindowSize() const
+    {
+        glfwGetWindowSize(m_window, (int *)&m_width, (int *)&m_height);
+        return {m_width, m_height};
     }
 
     bool Window::runs()
     {
-        return !glfwWindowShouldClose(windowID);
+        return !glfwWindowShouldClose(m_window);
     }
 
     void Window::swapBuffers()
     {
-        glfwSwapBuffers(windowID);
+        glfwSwapBuffers(m_window);
     }
 
     void Window::pollEvents()

@@ -8,7 +8,7 @@ struct __colorContainer
 
 
 namespace duffte{
-    void triangle2D(float x1, float y1, float x2, float y2, float x3, float y3, __colorContainer color = {1, 1, 1});
+    void triangle2D(float x1, float y1, float x2, float y2, float x3, float y3,float x, float y, __colorContainer color = {1, 1, 1});
 }
 
 #endif // __TRIANGLE_HPP__

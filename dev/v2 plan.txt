@@ -1,3 +1,7 @@
+In Progress:
+	Look over mainWindowHandler/gameWindow
+	triangle class parameter coords needs to be relative to the window, not the NDC (function needs to retrive the size of the window)
+
 New Features:
 	rectangle class
 	
@@ -7,4 +11,3 @@ Bugs:
 Refactoring:
 	variables in classes need comments
 	The key input system is really fucked up and needs a big rework
-	Look over mainWindowHandler/gameWindow
