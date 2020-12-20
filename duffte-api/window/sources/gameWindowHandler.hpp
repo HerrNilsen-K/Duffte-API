@@ -50,6 +50,7 @@ namespace duffte
     private:
         //"resizeCall" gets calledwhen the window is being resized, and calls "mainLoopContainer"
         void resizeCall(int width, int height);
+        void reposCall(int x, int y);
 
         //Callback to recieve the currently pressed key
         void keyCall(int key, int scancode, int action, int mods);

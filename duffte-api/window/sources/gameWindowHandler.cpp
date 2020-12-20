@@ -41,6 +41,14 @@ namespace duffte
                 ERROR_LOG("Error: gw in duffte::gameWindow::init() glfwSetKeyCallback() == NULL");
         });
 
+        glfwSetWindowPosCallback(m_window.ID(), [](GLFWwindow *window, int x, int y) {
+            gameWindow *gw = reinterpret_cast<gameWindow *>(glfwGetWindowUserPointer(window));
+            if (gw)
+                gw->reposCall(x, y);
+            else
+                ERROR_LOG("Error: gw in duffte::gameWindow::init() glfwSetKeyCallback() == NULL");
+        });
+
         if (p_flags & flags::GRAPHICS)
             m_flags |= GL_COLOR_BUFFER_BIT;
         if (p_flags & flags::DRAW_3D)
@@ -109,6 +117,11 @@ namespace duffte
     {
         render();
         glViewport(0, 0, width, height);
+    }
+
+    void gameWindow::reposCall(int x, int y)
+    {
+        render();
     }
 
     void gameWindow::render()
