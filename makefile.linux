@@ -1,19 +1,20 @@
 cc = clang++
 appName = program
 
-#sources = $(wildcard */*/*/*/*.cpp) $(wildcard */*/*/*.cpp) $(wildcard */*/*.cpp) $(wildcard */*.cpp) $(wildcard *.cpp)
 sources := $(shell find . -type f -iname \*.cpp)
 objects = $(patsubst %.cpp, %.o, $(sources))
 
 flags = -g -Wall -std=c++17
-libPath =
+libPath = -L.
 libs = -lglfw -lGLEW -lGLU -lGL
-VPATH := $(sort $(dir .))
 
 #Compile, link and execute the program
-all: program.exe run
+all: program run
 
-program.exe: $(objects)
+#Create a library
+lib: library
+
+program: $(objects)
 	$(cc) -o $(appName) $^ $(libPath) $(libs)
   
 %.o : %.cpp
@@ -23,6 +24,9 @@ program.exe: $(objects)
 #WARNING! The whole project needs to be recompiled after this
 clean:
 	find . -type f -iname \*.o -delete
+
+library: $(objects)
+	ar rcs libduffte-api.a $^
 
 .PHONY: all
   

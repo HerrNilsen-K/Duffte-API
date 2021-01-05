@@ -83,6 +83,12 @@ namespace duffte
         std::string title = std::to_string(p_title);
         m_window.changeTitle(title);
     }
+    
+    void gameWindow::changeTitle(double &p_title) 
+    {
+        std::string title = std::to_string(p_title);
+        m_window.changeTitle(title);
+    }
 
     windowSize gameWindow::getWindowSize()
     {
@@ -123,13 +129,16 @@ namespace duffte
     {
         render();
     }
-
+    static double result = 1;
     void gameWindow::render()
     {
+        double start = glfwGetTime();
         glClear(m_flags);
-        mainLoop();
+        mainLoop(result);
         m_window.swapBuffers();
         m_window.pollEvents();
+        double end = glfwGetTime();
+        result = end - start;
     }
 
     void gameWindow::terminate()

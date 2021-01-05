@@ -63,39 +63,33 @@ public:
 
   void onStart() override
   {
-    glEnable(GL_DEBUG_OUTPUT);
-    glDebugMessageCallback(MessageCallback, 0);
+    //glEnable(GL_DEBUG_OUTPUT);
+    //glDebugMessageCallback(MessageCallback, 0);
 
     std::cout << "Engine has started\n";
-    glfwSwapInterval(1);
-    glfwWindowHint(GLFW_SAMPLES, 4);
-    glEnable(GL_MULTISAMPLE);
+    glfwSwapInterval(0);
+    /*glfwWindowHint(GLFW_SAMPLES, 4);
+    glEnable(GL_MULTISAMPLE);*/
+    glEnable(GL_DEPTH_TEST);
   }
 
   double lastTime = glfwGetTime();
   int nbFrames = 0;
 
-  void mainLoop() override
+  void mainLoop(double time) override
   {
     static double i = 0, j = -200;
     duffte::triangle2D(-400, 400, 0, 0, -400, -400, getWindowSize().x, getWindowSize().y);
     duffte::triangle2D(i, 200, i + 200, -200, j, -200, getWindowSize().x, getWindowSize().y, {.5, .2, .1});
-    i += 4;
+    /*i += 4;
     j += 4;
     if (j >= getWindowSize().x)
     {
       i = -getWindowSize().x - 400;
       j = -getWindowSize().x - 800;
-    }
-
-    double currentTime = glfwGetTime();
-    nbFrames++;
-    if (currentTime - lastTime >= 1)
-    {
-      changeTitle(nbFrames);
-      nbFrames = 0;
-      lastTime += 1.0;
-    }
+    }*/
+    double t = 1 / time;
+    changeTitle(t);
   }
 
   void onExit() override { std::cout << "Engine has been shutdown\n"; }

@@ -20,7 +20,7 @@ namespace duffte
         //Will becalled once on startup
         virtual void onStart() = 0;
         //Main loop that gets called every 1/60 sec / every frame
-        virtual void mainLoop() = 0;
+        virtual void mainLoop(double) = 0;
         //Will be called when the window is closed
         virtual void onExit() = 0;
 
@@ -30,6 +30,7 @@ namespace duffte
         void changeTitle(const std::string &title);
         void changeTitle(int &title);
         void changeTitle(float &title);
+        void changeTitle(double &title);
 
     public:
         windowSize getWindowSize();

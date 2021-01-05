@@ -1,20 +1,25 @@
 #include "triangleCreation.hpp"
 #include <iostream>
 
-namespace duffte {
-trinagleCreation::trinagleCreation() {
-  float vertecies[] = {0.0f, 1.0f, 0.0f, 1.0f, -1.0f, 0.0f, -1.0f, -1.0f, 0.0f};
+namespace duffte
+{
+    trinagleCreation::trinagleCreation()
+    {
+        float vertecies[] = {
+            0.0f, 1.0f, 0.0f,
+            1.0f, -1.0f, 0.0f,
+            -1.0f, -1.0f, 0.0f};
 
-  const char *vertexShaderSource =
-      "#version 330 core\n"
-      "layout (location = 0) in vec3 aPos;\n"
+        const char *vertexShaderSource =
+            "#version 330 core\n"
+            "layout (location = 0) in vec3 aPos;\n"
 
-      "uniform vec2 first;\n"
-      "uniform vec2 second;\n"
-      "uniform vec2 third;\n"
+            "uniform vec2 first;\n"
+            "uniform vec2 second;\n"
+            "uniform vec2 third;\n"
 
-      "uniform mat4 model;\n"
-      "uniform mat4 view;\n"
+            "uniform mat4 model;\n"
+            "uniform mat4 view;\n"
             "uniform mat4 projection;\n"
 
             "void main()\n"
